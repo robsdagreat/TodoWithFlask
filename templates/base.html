@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Todo App{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-gray-800 text-white p-0">
+        <div class="ml-20">
+           <span class="text-2xl text-blue-400">RO</span><span class="text-2xl text-green-400">BS</span>
+        </div>
+        <div class="flex flex-row justify-center items-center">
+        <ul class="flex space-x-4">
+            <li><a href="{{ url_for('index') }}" class="hover:text-green-300 mr-20">Home</a></li>
+            <li><a href="{{ url_for('auth.login') }}" class="hover:text-green-300 mr-20">Login</a></li>
+            <li><a href="{{ url_for('auth.register') }}" class="hover:text-green-300 mr-20">Register</a></li>
+        </ul>
+        </div>
+    </nav>
+
+    <main class="container mx-auto mt-8 p-4">
+        {% block content %}{% endblock %}
+      
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
