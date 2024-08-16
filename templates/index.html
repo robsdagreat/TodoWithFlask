@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Todo List{% endblock %}
+
+{% block content %}
+    {% if not is_logged_in %}
+        <h1 id="hidden" class="text-2xl font-bold mb-20">Welcome to my Todo app! Please make sure you login to be able to plan your schedule.</h1>
+    {% endif %}
+    <div id="message-container" class="mb-4 hidden">
+        <span id="message-text" class="text-white"></span>
+    </div>    
+    <div id="todo-list" class="space-y-2">
+        <!-- Todo items will be dynamically inserted here -->
+    </div>
+    <form id="add-todo-form" class="mt-4">
+        <input type="text" id="new-todo" placeholder="Enter a new todo" required class="border p-2 rounded">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Todo</button>
+    </form>
+{% endblock %}

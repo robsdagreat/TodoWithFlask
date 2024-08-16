@@ -1,11 +1,15 @@
-from pymongo import MongoClient
-import os
+from extensions import db  # Import db from extensions.py
 
-MONGO_URI = os.getenv('MONGO_URI','mongodb://localhost:27017/todo_db')
-if not MONGO_URI:
-    raise EnvironmentError("MONGO_URI environment variable not set")
+class User(db.Model):
+    __tablename__ = 'user'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(100), unique=True, nullable=False)
+    password = db.Column(db.String(200), nullable=False)
 
-client = MongoClient(MONGO_URI)
-db = client['todo_db']
-tasks_collection = db['tasks']
-users_collection = db['users']
+class Task(db.Model):
+    __tablename__ = 'task'
+    id = db.Column(db.Integer, primary_key=True)
+    task = db.Column(db.String(200), nullable=False)
+    completed = db.Column(db.Boolean, default=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('tasks', lazy=True))
